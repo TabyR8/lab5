@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIZZA SORRY — Современная пиццерия</title>
+    <style>
+        /* Переменные и сброс стилей */
+        :root {
+            --primary: #FF5A1F;
+            --primary-hover: #E04810;
+            --secondary: #FFB020;
+            --bg-dark: #121212;
+            --bg-light: #1A1A1A;
+            --bg-card: #242424;
+            --text-main: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Навигация */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Кнопка призыва к действию (общая) */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 90, 31, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 90, 31, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Секции */
+        section {
+            padding: 100px 20px 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 50px;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        /* Главный раздел (Hero) */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 140px;
+            background: radial-gradient(circle at center, #261712 0%, var(--bg-dark) 70%);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-badge {
+            background-color: rgba(255, 90, 31, 0.1);
+            color: var(--secondary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 176, 32, 0.2);
+        }
+
+        #hero h1 {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        #hero h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        #hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Раздел О компании */
+        #about {
+            background-color: var(--bg-light);
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .about-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 35px;
+        }
+
+        .stat-item {
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            flex: 1;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .about-image-mock {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 2px dashed #3a3a3a;
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image-mock::before {
+            content: '🍕';
+            font-size: 100px;
+            opacity: 0.2;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Раздел Меню */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-card {
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .menu-image-mock {
+            height: 220px;
+            background: linear-gradient(135deg, #333 0%, #222 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            position: relative;
+        }
+
+        .menu-card:hover .menu-image-mock {
+            background: linear-gradient(135deg, #3a2218 0%, #222 100%);
+        }
+
+        .menu-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .menu-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .menu-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .menu-price {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .menu-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: 1px solid #444;
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .menu-card:hover .menu-btn {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Раздел Отзывы (пустой) */
+        #reviews {
+            background-color: var(--bg-light);
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .empty-reviews {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            border: 1px dashed #3a3a3a;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .empty-reviews-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .empty-reviews h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .empty-reviews p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Раздел Контакты */
+        .contacts-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        .info-panel {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .info-block {
+            margin-bottom: 30px;
+        }
+
+        .info-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-block h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-block p {
+            font-size: 16px;
+            color: var(--text-main);
+        }
+
+        .info-block span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .map-mock {
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+            min-height: 300px;
+        }
+
+        .map-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: #0b0b0b;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            border-top: 1px solid #1a1a1a;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Мобильное меню и адаптивность */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 900px) {
+            #hero h1 { font-size: 44px; }
+            .about-wrapper { grid-template-columns: 1fr; gap: 30px; }
+            .contacts-wrapper { grid-template-columns: 1fr; }
+            .about-image-mock { height: 250px; }
+            
+            .menu-toggle { display: flex; }
+            
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(18, 18, 18, 0.98);
+                flex-direction: column;
+                padding: 30px;
+                gap: 20px;
+                text-align: center;
+                border-bottom: 1px solid #2a2a2a;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            
+            /* Анимация кнопки бургер-меню при активации */
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+                background-color: var(--primary);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+                background-color: var(--primary);
+            }
+        }
+
+        @media (max-width: 480px) {
+            #hero h1 { font-size: 36px; }
+            section { padding: 80px 15px 50px 15px; }
+            .about-stats { flex-direction: column; gap: 15px; }
+            .info-panel { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <header>
+        <div class="nav-container">
+            <a href="#hero" class="logo">PIZZA <span>SORRY</span></a>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#menu">Меню</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Главный раздел (Hero) -->
+    <section id="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Нам искренне жаль...</span>
+            <h1>...но наша пицца <span>слишком</span> хороша!</h1>
+            <p>Мы просим прощения у ваших диет и силы воли. Перед этим хрустящим тестом, тянущимся сыром и сочной начинкой просто невозможно устоять.</p>
+            <a href="#menu" class="btn">Посмотреть меню</a>
+        </div>
+    </section>
+
+    <!-- Раздел О компании -->
+    <section id="about">
+        <div class="about-wrapper">
+            <div class="about-text">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 25px;">Наша <span>История</span></h2>
+                <h3>Почему именно «SORRY»?</h3>
+                <p>Все началось с амбициозной идеи: готовить пиццу, за которую не стыдно. Мы постоянно извиняемся перед конкурентами, потому что наши гости, попробовав PIZZA SORRY один раз, больше не возвращаются к старым привычкам.</p>
+                <p>Мы используем только фермерские ингредиенты, выдерживаем тесто 48 часов по особому рецепту и выпекаем каждую пиццу с любовью и долей гастрономического безумия.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">48ч</span>
+                        <span class="stat-label">Ферментация теста</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Видов пиццы</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image-mock"></div>
+        </div>
+    </section>
+
+    <!-- Раздел Меню -->
+    <section id="menu">
+        <h2 class="section-title">Популярные <span>Пиццы</span></h2>
+        <div class="menu-grid">
+            <!-- Пицца 1 -->
+            <div class="menu-card">
+                <div class="menu-image-mock">🍕</div>
+                <div class="menu-info">
+                    <div class="menu-meta">
+                        <h3 class="menu-title">Пепперони Sorry</h3>
+                        <span class="menu-price">690 ₽</span>
+                    </div>
+                    <p class="menu-desc">Острая пикантная пепперони, много моцареллы, фирменный томатный соус с добавлением базилика.</p>
+                    <a href="#contacts" class="menu-btn">Заказать</a>
+                </div>
+            </div>
+            <!-- Пицца 2 -->
+            <div class="menu-card">
+                <div class="menu-image-mock">🧀</div>
+                <div class="menu-info">
+                    <div class="menu-meta">
+                        <h3 class="menu-title">Четыре Сыра</h3>
+                        <span class="menu-price">750 ₽</span>
+                    </div>
+                    <p class="menu-desc">Идеальное сочетание моцареллы, горгонзолы, пармезана и нежного сыра чеддер со сливочным соусом.</p>
+                    <a href="#contacts" class="menu-btn">Заказать</a>
+                </div>
+            </div>
+            <!-- Пицца 3 -->
+            <div class="menu-card">
+                <div class="menu-image-mock">🍄</div>
+                <div class="menu-info">
+                    <div class="menu-meta">
+                        <h3 class="menu-title">Грибная с трюфелем</h3>
+                        <span class="menu-price">790 ₽</span>
+                    </div>
+                    <p class="menu-desc">Ароматные лесные грибы, шампиньоны, белый соус и капли изысканного трюфельного масла.</p>
+                    <a href="#contacts" class="menu-btn">Заказать</a>
+                </div>
+            </div>
+            <!-- Пицца 4 -->
+            <div class="menu-card">
+                <div class="menu-image-mock">🌿</div>
+                <div class="menu-info">
+                    <div class="menu-meta">
+                        <h3 class="menu-title">Маргарита Классик</h3>
+                        <span class="menu-price">550 ₽</span>
+                    </div>
+                    <p class="menu-desc">Ничего лишнего: сочные томаты, свежая моцарелла, ароматный базилик и оливковое масло первого отжима.</p>
+                    <a href="#contacts" class="menu-btn">Заказать</a>
+                </div>
+            </div>
+            <!-- Пицца 5 -->
+            <div class="menu-card">
+                <div class="menu-image-mock">🥓</div>
+                <div class="menu-info">
+                    <div class="menu-meta">
+                        <h3 class="menu-title">Мясной Сорри-Мис</h3>
+                        <span class="menu-price">850 ₽</span>
+                    </div>
+                    <p class="menu-desc">Сытная пицца с беконом, ветчиной, охотничьими колбасками, маринованным луком и соусом BBQ.</p>
+                    <a href="#contacts" class="menu-btn">Заказать</a>
+                </div>
+            </div>
+            <!-- Пицца 6 -->
+            <div class="menu-card">
+                <div class="menu-image-mock">🍍</div>
+                <div class="menu-info">
+                    <div class="menu-meta">
+                        <h3 class="menu-title">Извини, Гавайская</h3>
+                        <span class="menu-price">680 ₽</span>
+                    </div>
+                    <p class="menu-desc">Мы извиняемся перед Италией, но это сочетание сочной куриной грудки и сладкого ананаса слишком вкусно.</p>
+                    <a href="#contacts" class="menu-btn">Заказать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел Отзывы -->
+    <section id="reviews">
+        <div class="reviews-container">
+            <h2 class="section-title">Что говорят <span>о нас</span></h2>
+            <div class="empty-reviews">
+                <span class="empty-reviews-icon">🤫</span>
+                <h4>Отзывов пока нет</h4>
+                <p>Мы открылись совсем недавно, но наши повара уже вовсю раскатывают тесто! Будьте первым, кто оставит свой честный отзыв после заказа.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел Контакты -->
+    <section id="contacts">
+        <h2 class="section-title">Ждем <span>Вас</span></h2>
+        <div class="contacts-wrapper">
+            <div class="info-panel">
+                <div class="info-block">
+                    <h4>📍 Адрес</h4>
+                    <p>ул. Гастрономическая, д. 42</p>
+                    <span>Санкт-Петербург, Россия</span>
+                </div>
+                <div class="info-block">
+                    <h4>🕒 Режим работы</h4>
+                    <p>Ежедневно: 11:00 — 23:00</p>
+                    <span>Кухня закрывается в 22:30</span>
+                </div>
+                <div class="info-block">
+                    <h4>📞 Контакты</h4>
+                    <p>+7 (812) 555-35-35</p>
+                    <span>hello@pizzasorry.ru</span>
+                </div>
+            </div>
+            <div class="map-mock">
+                <span class="map-icon">📍</span>
+                <h3 style="margin-bottom: 10px;">Интерактивная карта</h3>
+                <p style="color: var(--text-muted); max-width: 300px; font-size: 14px;">Здесь будет отображаться ваше точное местоположение для гостей</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2026 PIZZA SORRY. Все права защищены. Извините, если было слишком вкусно.</p>
+    </footer>
+
+    <!-- Скрипт для мобильного меню -->
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        // Переключение меню
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на ссылку
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
