@@ -456,6 +456,21 @@
             margin-top: 4px;
         }
 
+        .info-block a {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 8px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .info-block a:hover {
+            color: var(--secondary);
+            transform: translateX(4px);
+        }
+
         .map-mock {
             background: linear-gradient(135deg, #222 0%, #111 100%);
             border-radius: 20px;
@@ -473,6 +488,59 @@
             font-size: 48px;
             margin-bottom: 15px;
             animation: float 3s ease-in-out infinite;
+        }
+
+        /* Раздел Наш Бусти */
+        #boosty {
+            background-color: var(--bg-light);
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .boosty-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .boosty-card {
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .boosty-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .boosty-qr {
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 16px;
+            border: 1px solid #333;
+            margin-bottom: 20px;
+        }
+
+        .boosty-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .boosty-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            max-width: 360px;
+            margin: 0 auto 25px;
         }
 
         /* Подвал */
@@ -585,6 +653,7 @@
                 <li><a href="#menu">Меню</a></li>
                 <li><a href="#reviews">Отзывы</a></li>
                 <li><a href="#contacts">Контакты</a></li>
+                <li><a href="#boosty">Бусти</a></li>
             </ul>
         </div>
     </header>
@@ -732,12 +801,25 @@
                     <h4>📞 Контакты</h4>
                     <p>+7 (812) 555-35-35</p>
                     <span>hello@pizzasorry.ru</span>
+                    <a href="https://t.me/+a6wAn2nf7RwwYmRi" target="_blank" rel="noopener">✈️ Наш Telegram-канал</a>
                 </div>
             </div>
             <div class="map-mock">
                 <span class="map-icon">📍</span>
                 <h3 style="margin-bottom: 10px;">Интерактивная карта</h3>
                 <p style="color: var(--text-muted); max-width: 300px; font-size: 14px;">Здесь будет отображаться ваше точное местоположение для гостей</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел Наш Бусти -->
+    <section id="boosty">
+        <h2 class="section-title">Наш <span>Бусти</span></h2>
+        <div class="boosty-container">
+            <div class="boosty-card">
+                <img src="photo_2026-10-11_11-42-44.jpg" alt="QR-код для поддержки PIZZA SORRY на Boosty" class="boosty-qr">
+                <h3>Поддержите нас на Boosty</h3>
+                <p>Отсканируйте QR-код, чтобы поддержать нашу пиццерию на Boosty и первыми узнавать о новинках меню.</p>
             </div>
         </div>
     </section>
